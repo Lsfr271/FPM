@@ -1,5 +1,7 @@
 #include "PFM.hpp"
 
+std::map<std::string, USERS> userLevel;
+
 bool PFM::canDeleteFile(USERS user) {
     if (user == USER){
         return _fp == PL_NONE;
@@ -74,6 +76,23 @@ void PFM::setPermissions(FILES newPerm, USERS user) {
     }
 
     _fp = newPerm;
+}
+
+void PFM::promoteToAdmin(const std::string &name) {
+    if (userLevel[name] == USER){
+        userLevel[name] = ADMIN;
+    }
+}
+
+void PFM::promoteToOwner(const std::string &name) {
+    bool ownerExists = std::any_of(userLevel.begin(),
+    userLevel.end(), [](const auto& pair){
+        return pair.second == OWNER;
+    });
+
+    if (!ownerExists && userLevel[name] == ADMIN){
+        userLevel[name] = OWNER;
+    }
 }
 
 std::string PFM::getPermissionLevel_user(USERS user) {
