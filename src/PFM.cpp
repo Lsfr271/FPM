@@ -98,6 +98,22 @@ void PFM::promoteToOwner(const std::string &name) {
     userLevel[name] = OWNER;
 }
 
+void PFM::lockFile(USERS user) {
+    if (user != OWNER){
+        throw std::invalid_argument("You are not level of \"OWNER\".");
+    }
+
+    _fp = PL_READONLY;
+}
+
+void PFM::unlockFile(USERS user) {
+    if (user != OWNER){
+        throw std::invalid_argument("You are not level of \"OWNER\".");
+    }
+
+    _fp = PL_NONE;
+}
+
 std::string PFM::getPermissionLevel_user(USERS user) {
     if (user == USER){
         return "User Permission level.";
