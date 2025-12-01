@@ -10,7 +10,7 @@ This API allows you to check file permissions. There can be 3 levels, USER, ADMI
 
 2- Go to compiling folder. It will teach you to build tasks.json and launch.json, c_cpp_properties.json if needed.
 
-3- Inclduing it:
+3- Including it:
 
 ```cpp
 #include "../<yourFolder>/PFM.hpp"
