@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build and Run Active File",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++20",
+        "${file}",
+        "<THIS PATH GOES TO THE .CPP FILE CALLED PFM.cpp>",
+        "-I", "<THIS PATH IS WHERE THE HEADER FILES ARE INCLUDED. ONLY STOP AT THE FOLDER. (HEADERS: PFM.hpp pfm_operators.hpp)",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+        ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile active file to .exe"
+    },
+    {
+      "label": "Run Executable",
+      "type": "shell",
+      "dependsOn": "Build and Run Active File",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "Start-Process -NoNewWindow -Wait '${fileDirname}\\${fileBasenameNoExtension}.exe'"
+      ],
+      "group": "build"
+    }
+  ]
+}
