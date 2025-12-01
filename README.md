@@ -4,6 +4,8 @@
 This API allows you to check file permissions. There can be 3 levels, USER, ADMIN, and OWNER. User has low-control, Admin has moderate control, and Owner has full control. There can only be 1 owner.
 
 ## HOW TO INSTALL (GCC/G++ ONLY)
+### before starting, go to releases to get the .rar file and extract it to follow the steps, or copy the files from the repository.
+
 1- Copy the files from include and src to one main folder. Name it whatever you want (the folder). 
 
 2- Go to compiling folder. It will teach you to build tasks.json and launch.json, c_cpp_properties.json if needed.
