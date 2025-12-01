@@ -1,8 +1,8 @@
-#include "PFM.hpp"
+#include "FPM.hpp"
 
 std::map<std::string, USERS> userLevel;
 
-bool PFM::canDeleteFile(USERS user) {
+bool FPM::canDeleteFile(USERS user) {
     if (user == USER){
         return _fp == PL_NONE;
     }
@@ -18,7 +18,7 @@ bool PFM::canDeleteFile(USERS user) {
     return false;
 }
 
-bool PFM::canSeeFile(USERS user) {
+bool FPM::canSeeFile(USERS user) {
     if (user == USER){
         return _fp != PL_HIDDEN && _fp != PL_SYSTEM;
     }
@@ -34,7 +34,7 @@ bool PFM::canSeeFile(USERS user) {
     return false;
 }
 
-bool PFM::canModifyFile(USERS user) {
+bool FPM::canModifyFile(USERS user) {
     if (user == USER){
         return _fp == PL_NONE;
     }
@@ -50,27 +50,27 @@ bool PFM::canModifyFile(USERS user) {
     return false;
 }
 
-bool PFM::canRenameFile(USERS user) {
+bool FPM::canRenameFile(USERS user) {
     return canModifyFile(user);
 }
 
-bool PFM::isHidden(USERS user) {
+bool FPM::isHidden(USERS user) {
     return !canSeeFile(user);
 }
 
-bool PFM::isProtected() {
+bool FPM::isProtected() {
     return _fp != PL_NONE;
 }
 
-bool PFM::hasFullControl(USERS user) {
+bool FPM::hasFullControl(USERS user) {
     return user == OWNER || (user == ADMIN && _fp != PL_SYSTEM && _fp != PL_READONLY);
 }
 
-bool PFM::isAccessible(USERS user) {
+bool FPM::isAccessible(USERS user) {
     return canSeeFile(user) && (canModifyFile(user) || canDeleteFile(user));
 }
 
-void PFM::setPermissions(FILES newPerm, USERS user) {
+void FPM::setPermissions(FILES newPerm, USERS user) {
     if (user != OWNER){
         throw std::invalid_argument("You are not the level of \"OWNER\".");
     }
@@ -78,13 +78,13 @@ void PFM::setPermissions(FILES newPerm, USERS user) {
     _fp = newPerm;
 }
 
-void PFM::promoteToAdmin(const std::string &name) {
+void FPM::promoteToAdmin(const std::string &name) {
     if (userLevel[name] == USER){
         userLevel[name] = ADMIN;
     }
 }
 
-void PFM::promoteToOwner(const std::string &name) {
+void FPM::promoteToOwner(const std::string &name) {
     if (userLevel[name] != ADMIN){
         return;
     }
@@ -98,7 +98,7 @@ void PFM::promoteToOwner(const std::string &name) {
     userLevel[name] = OWNER;
 }
 
-void PFM::lockFile(USERS user) {
+void FPM::lockFile(USERS user) {
     if (user != OWNER){
         throw std::invalid_argument("You are not level of \"OWNER\".");
     }
@@ -106,7 +106,7 @@ void PFM::lockFile(USERS user) {
     _fp = PL_READONLY;
 }
 
-void PFM::unlockFile(USERS user) {
+void FPM::unlockFile(USERS user) {
     if (user != OWNER){
         throw std::invalid_argument("You are not level of \"OWNER\".");
     }
@@ -114,7 +114,7 @@ void PFM::unlockFile(USERS user) {
     _fp = PL_NONE;
 }
 
-std::string PFM::getPermissionLevel_user(USERS user) {
+std::string FPM::getPermissionLevel_user(USERS user) {
     if (user == USER){
         return "User Permission level.";
     }
@@ -130,7 +130,7 @@ std::string PFM::getPermissionLevel_user(USERS user) {
     }
 }
 
-std::string PFM::getPermissionLevel_file() {
+std::string FPM::getPermissionLevel_file() {
     switch (_fp) {
         case PL_NONE:
             return "No Protection (PL_NONE)";
@@ -149,7 +149,7 @@ std::string PFM::getPermissionLevel_file() {
     }
 }
 
-std::string PFM::AccessReport(USERS user) {
+std::string FPM::AccessReport(USERS user) {
     std::string report = "User level: " + getPermissionLevel_user(user) + "\n";
 
     report += "File Level: " + getPermissionLevel_file() + "\n";
