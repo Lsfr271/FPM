@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 
-#include "PFM.hpp"
-#include "pfm_operators.hpp"
+#include "FPM.hpp"
+#include "FPM_operators.hpp"
 
 int main() {
     // Initialize users
@@ -13,12 +13,12 @@ int main() {
     userLevel["Marn"] = OWNER;
 
     // Create files
-    PFM file1(PL_NONE);
-    PFM file2(PL_MED);
-    PFM file3(PL_READONLY);
-    PFM file4(PL_HIDDEN);
+    FPM file1(PL_NONE);
+    FPM file2(PL_MED);
+    FPM file3(PL_READONLY);
+    FPM file4(PL_HIDDEN);
 
-    std::vector<PFM> files = {file1, file2, file3, file4};
+    std::vector<FPM> files = {file1, file2, file3, file4};
     std::vector<std::string> filenames = {"file1", "file2", "file3",
     "file4"};
 
@@ -36,7 +36,7 @@ int main() {
     USERS level = userLevel[currentUser];
 
     std::cout << "Welcome " << currentUser << "! Your level is: "
-    << PFM().getPermissionLevel_user(level) << "\n";
+    << FPM().getPermissionLevel_user(level) << "\n";
 
     while (true){
         std::cout << "Files available: \n";
@@ -74,8 +74,6 @@ int main() {
 
         if (level == OWNER){
             std::cout << "6: Promote Admin to Owner \n";
-            std::cout << "7: Lock File \n";
-            std::cout << "8: Unlock File \n";
         }
 
         int action;
@@ -137,20 +135,6 @@ int main() {
                     files[0].promoteToOwner(uname);
 
                     std::cout << uname << " promoted to Owner!\n";
-                }
-
-                break;
-
-            case 7:
-                if (level == OWNER){
-                    files[choice].lockFile(level);
-                }
-
-                break;
-
-            case 8:
-                if (level == OWNER){
-                    files[choice].unlockFile(level);
                 }
 
                 break;
