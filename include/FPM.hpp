@@ -1,14 +1,14 @@
 /* LSFR__ 26/11/2025 (November 26th, 2025)
 
     Questions you might ask:
-        What is PFM? PFM is a File Permission Manager. (Originally called Permission File Manager (PFM))
-        Can you use PFM? Yes, this is open source.
-        Can you modify PFM's Source code? No, not for now.
+        What is FPM? FPM is a File Permission Manager. (Originally called Permission File Manager (FPM))
+        Can you use FPM? Yes, this is open source.
+        Can you modify FPM's Source code? No, not for now.
         Can you join in as a contributor? No, not for now.
 */
 
-#ifndef PFM_MANAGER_H
-#define PFM_MANAGER_H
+#ifndef FPM_MANAGER_H
+#define FPM_MANAGER_H
 
 #pragma once
 
@@ -67,12 +67,12 @@ enum FILES {
 
 extern std::map<std::string, USERS> userLevel;
 
-struct PFM {
+struct FPM {
     public:
         FILES _fp;
 
-        PFM() = default;
-        PFM(FILES fp) : _fp(fp) {}
+        FPM() = default;
+        FPM(FILES fp) : _fp(fp) {}
 
         bool canDeleteFile(USERS user);
         bool canSeeFile(USERS user);
