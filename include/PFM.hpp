@@ -86,6 +86,9 @@ struct PFM {
         void setPermissions(FILES newPerm, USERS user);
         void promoteToAdmin(const std::string& name);
         void promoteToOwner(const std::string& name);
+        void lockFile(USERS user);
+        void unlockFile(USERS user);
+
 
         std::string getPermissionLevel_user(USERS user);
         std::string getPermissionLevel_file();
