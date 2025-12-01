@@ -85,14 +85,17 @@ void PFM::promoteToAdmin(const std::string &name) {
 }
 
 void PFM::promoteToOwner(const std::string &name) {
-    bool ownerExists = std::any_of(userLevel.begin(),
-    userLevel.end(), [](const auto& pair){
-        return pair.second == OWNER;
-    });
-
-    if (!ownerExists && userLevel[name] == ADMIN){
-        userLevel[name] = OWNER;
+    if (userLevel[name] != ADMIN){
+        return;
     }
+
+    for (auto& [userName, level] : userLevel){
+        if (level == OWNER){
+            level = ADMIN;
+        }
+    }
+
+    userLevel[name] = OWNER;
 }
 
 std::string PFM::getPermissionLevel_user(USERS user) {
