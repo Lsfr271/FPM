@@ -22,6 +22,17 @@ int main() {
     std::vector<std::string> filenames = {"file1", "file2", "file3",
     "file4"};
 
+    FPM file(PL_NONE);
+
+    // log actions
+    file.logAction(OWNER, "unlocked file");
+    file.logAction(USER, "Attempted to delete file");
+
+    for (const auto& entry : file.getHistory())
+    {
+        std::cout << entry << "\n";
+    }
+
     std::string currentUser;
 
     std::cout << "Enter your username: " << "\n";
