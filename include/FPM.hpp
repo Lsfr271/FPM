@@ -73,37 +73,45 @@ extern std::map<std::string, USERS> userLevel;
 struct FPM {
     private:
         std::vector<std::string> _history;
-        
-    public:
         FILES _fp;
 
+    public:
         FPM() = default;
         FPM(FILES fp) : _fp(fp) {}
 
-        bool canDeleteFile(USERS user);
-        bool canSeeFile(USERS user);
-        bool canModifyFile(USERS user);
-        bool canRenameFile(USERS user);
-        bool isHidden(USERS user);
-        bool isProtected();
-        bool hasFullControl(USERS user);
-        bool isAccessible(USERS user);
+        FPM& operator=(const FPM& other);
 
-        void setPermissions(FILES newPerm, USERS user);
-        void promoteToAdmin(const std::string& name);
-        void promoteToOwner(const std::string& name);
-        void lockFile(USERS user);
-        void unlockFile(USERS user);
-        void setOwner(const std::string& name);
-        void demoteToUser(const std::string& name);
-        void logAction(USERS user, const std::string& action);
+        FILES getPermission() const; // gets the file permission level of _fp
 
-        std::string getPermissionLevel_user(USERS user);
-        std::string getPermissionLevel_file();
-        std::string AccessReport(USERS user);
-        std::string getOwner();
+        bool canDeleteFile(USERS user); // checks if user can delete file
+        bool canSeeFile(USERS user); // checks if a user can see the file
+        bool canModifyFile(USERS user); // checks if a user can modify the file
+        bool canRenameFile(USERS user); // checks if a user can rename the file
+        bool isHidden(USERS user); // returns true if the file is hidden from the user
+        bool isProtected(); // returns true if the file has any protection
+        bool hasFullControl(USERS user); // checks if the user has full control
+        bool isAccessible(USERS user); // checks if the file is accessible (viewable, modifiable)
+        bool isOwner(const std::string& name); // checks if a user is an OWNER
 
-        std::vector<std::string> getHistory() const;
+        void setPermissions(FILES newPerm, USERS user); // sets the file permissions, NOTE: OWNER can only do this
+        void promoteToAdmin(const std::string& name); // promotes a USER to ADMIN
+        void promoteToOwner(const std::string& name); // promotes an ADMIN to OWNER
+        void lockFile(USERS user); // locks the file as PL_READONLY
+        void unlockFile(USERS user); // unlocks the file as PL_NONE (no protection)
+        void setOwner(const std::string& name); // sets the owner
+        void demoteToUser(const std::string& name); // demotes an ADMIN to USER
+        void logAction(USERS user, const std::string& action); // logs a users action in history
+        void reset(USERS user); // resets the file permission to PL_NONE (OWNER only)
+
+        FPM clone() const; // returns a copy of this PFM object
+
+        std::string getPermissionLevel_user(USERS user); // returns a string describing the users permission level
+        std::string getPermissionLevel_file() const; // returns a string describing the files permission level
+        std::string AccessReport(USERS user); // returns a report of the users access to the file
+        std::string getOwner(); // returns the current OWNER's name
+
+        std::vector<std::string> getHistory() const; // returns the full action history
+        std::vector<std::string> filterHistory(USERS user) const; // returns the history filtered by user level
 };
 
 #endif
