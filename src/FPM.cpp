@@ -3,19 +3,19 @@
 std::map<std::string, USERS> userLevel;
 
 bool FPM::canDeleteFile(USERS user) {
-    if (user == USER){
-        return _fp == PL_NONE;
-    }
+  if (user == USER) {
+    return _fp == PL_NONE;
+  }
 
-    if (user == ADMIN){
-        return _fp == PL_NONE || _fp == PL_MED;
-    }
+  if (user == ADMIN) {
+    return _fp == PL_NONE || _fp == PL_MED;
+  }
 
-    if (user == OWNER){
-        return _fp != PL_READONLY;
-    }
+  if (user == OWNER) {
+    return _fp != PL_READONLY;
+  }
 
-    return false;
+  return false;
 }
 
 bool FPM::canSeeFile(USERS user) {
@@ -68,6 +68,13 @@ bool FPM::hasFullControl(USERS user) {
 
 bool FPM::isAccessible(USERS user) {
     return canSeeFile(user) && (canModifyFile(user) || canDeleteFile(user));
+}
+
+bool FPM::isOwner(const std::string &name)
+{
+    auto it = userLevel.find(name);
+
+    return it != userLevel.end() && it->second == OWNER;
 }
 
 void FPM::setPermissions(FILES newPerm, USERS user) {
@@ -134,7 +141,7 @@ std::string FPM::getPermissionLevel_user(USERS user) {
     }
 }
 
-std::string FPM::getPermissionLevel_file() {
+std::string FPM::getPermissionLevel_file() const {
     switch (_fp) {
         case PL_NONE:
             return "No Protection (PL_NONE)";
@@ -169,11 +176,9 @@ std::string FPM::getOwner() {
         if (level == OWNER){
             return name;
         }
-
-        return std::string("No owner found.");
     }
 
-    return "(IGNORE)";
+    return std::string("No owner found.");
 }
 
 void FPM::demoteToUser(const std::string& name)
@@ -230,7 +235,42 @@ void FPM::logAction(USERS user, const std::string& action)
     _history.push_back(entry);
 }
 
+void FPM::reset(USERS user)
+{
+    if (user != OWNER)
+    {
+        throw std::invalid_argument("You are not level of"
+        " \"OWNER\".");
+    }
+
+    _fp = PL_NONE;
+}
+
+FPM FPM::clone() const {
+    return *this;
+}
+
 std::vector<std::string> FPM::getHistory() const
 {
     return _history;
+}
+
+std::vector<std::string> FPM::filterHistory(USERS user) const
+{
+    std::vector<std::string> result;
+
+    for (const auto& entry : _history)
+    {
+        if (entry.find(user == USER ? "USER" : user == ADMIN
+        ? "ADMIN" : "OWNER") != std::string::npos)
+        {
+            result.push_back(entry);
+        }
+    }
+
+    return result;
+}
+
+FILES FPM::getPermission() const {
+    return _fp;
 }
