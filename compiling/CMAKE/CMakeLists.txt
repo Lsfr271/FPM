@@ -9,4 +9,4 @@ target_include_directories(fpm PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/../include
 )
 
-target_compile_definitions(app PRIVATE cxx_std_20)
+target_compile_definitions(fpm PRIVATE cxx_std_20)
