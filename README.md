@@ -65,5 +65,5 @@ YourRootProject/
             fpm_operators.hpp
         src/
             FPM.cpp
-    .vscode_cmake # optional; RENAME THIS TO .vscode then when your done coding with the library, press F7 to build and run.
+    .vscode_cmake # RENAME THIS TO .vscode then when your done coding with the library, press F7 to build and run.
 ```
