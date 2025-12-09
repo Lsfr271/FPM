@@ -4,19 +4,37 @@
 This API allows you to check file permissions. There can be 3 levels, USER, ADMIN, and OWNER. User has low-control, Admin has moderate control, and Owner has full control. There can only be 1 owner.
 
 ## HOW TO INSTALL (GCC/G++ && CMAKE)
-### before starting, go to releases to get the .rar file and extract it to follow the steps, or copy the files from the repository.
 
 # GCC/G++
 
-1- Copy the files from include and src to one main folder. Name it whatever you want (the folder) or extract the .rar from the `releases`. 
+1- Extract the `.rar` file from `Releases`, avoid `Version 1.0.3` that is for CMAKE.
 
-2- Go to compiling folder. It will teach you to build tasks.json and launch.json, c_cpp_properties.json if needed.
+2- After you have gotten `Version 1.02` or earlier builds, put the `FPM` and `.vscode` folders in your root directory.
 
-3- Including it:
+3- Your project structure must be something like:
+
+```
+YourRootProject/
+    src/
+        main.cpp
+
+    PFM/
+        FPM.cpp
+        fpm_operators.hpp
+        FPM.hpp
+
+    .vscode/
+        settings.json
+        tasks.json
+        launch.json
+        c_cpp_properties.json
+```
+
+4- After that, Include it like:
 
 ```cpp
-#include "../<yourFolder>/FPM.hpp"
-#include "../<yourFolder>/fpm_operators.hpp"
+#include "FPM.hpp" // if it dosent work do ../PFM/FPM.hpp
+#include "fpm_operators.hpp" // if it dosent work do ../PFM/fpm_operators.hpp
 
 int main() {
 // your code
