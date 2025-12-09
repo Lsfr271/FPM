@@ -18,7 +18,7 @@ YourRootProject/
     src/
         main.cpp
 
-    PFM/
+    FPM/
         FPM.cpp
         fpm_operators.hpp
         FPM.hpp
@@ -29,7 +29,9 @@ YourRootProject/
         c_cpp_properties.json
 ```
 
-4- After that, Include it like:
+4- optional if you want faster compiling; go to `tasks.json` and `launch.json` and `c_cpp_properties.json` and change to your path.
+
+5- After that, Include it like:
 
 ```cpp
 #include "FPM.hpp" // if it dosent work do ../PFM/FPM.hpp
@@ -40,7 +42,7 @@ int main() {
 }
 ```
 
-5- optional; you can hit f7 to compile and run.
+6- optional; you can hit f7 to compile and run.
 
 # CMAKE
 
