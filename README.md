@@ -17,7 +17,7 @@ This API allows you to check file permissions. There can be 3 levels, USER, ADMI
 
 3- Your project structure must be something like:
 
-```
+```bash
 YourRootProject/
     src/
         main.cpp
