@@ -8,6 +8,7 @@ This API allows you to check file permissions. There can be 3 levels, USER, ADMI
 ## MANDATORY NOTES YOU NEED TO READ
 - FOR CMAKE USE VERSION 1.0.3
 - FOR G++ USE VERSION EARLIER THAN 1.0.3
+- Powershell only, if your on bash terminal or something else, this might not work for you.
 
 # GCC/G++
 
