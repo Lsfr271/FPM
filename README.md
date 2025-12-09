@@ -5,9 +5,12 @@ This API allows you to check file permissions. There can be 3 levels, USER, ADMI
 
 ## HOW TO INSTALL (GCC/G++ && CMAKE)
 
+## FOR CMAKE USE VERSION 1.0.3
+## FOR G++ USE VERSION EARLIER THAN 1.0.3
+
 # GCC/G++
 
-1- Extract the `.rar` file from `Releases`, avoid `Version 1.0.3` that is for CMAKE.
+1- Extract the `.rar` file from `Releases`.
 
 2- After you have gotten `Version 1.02` or earlier builds, put the `FPM` and `.vscode` folders in your root directory.
 
