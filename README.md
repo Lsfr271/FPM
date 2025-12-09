@@ -13,7 +13,7 @@ This API allows you to check file permissions. There can be 3 levels, USER, ADMI
 
 1- Extract the `.rar` file from `Releases`.
 
-2- After you have gotten `Version 1.02` or earlier builds, put the `FPM` and `.vscode` folders in your root directory.
+2- After you have gotten `Version 1.0.2` or earlier builds, put the `FPM` and `.vscode` folders in your root directory.
 
 3- Your project structure must be something like:
 
