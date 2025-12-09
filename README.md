@@ -25,18 +25,22 @@ int main() {
 
 # CMAKE
 
-1- Copy the files from `include/` and `src/` into a folder inside your project (name the folder whatever you want), or download the `.rar` from Releases and extract it.
+1- Extract the `.rar` from `Version 1.0.3` in `Releases`.
 
 2- In your projects `CMakeLists.txt`, add FPM as a library:
 
 ```cmake
-add_subdirectory(<path_to_FPM_folder>)
+cmake_minimum_required(VERSION 3.20)
+project(UserApp LANGUAGES CXX)
+
+add_subdirectory(FPM)
 
 add_executable(app
-    src/main.cpp
+    src/main.cpp # or whatever your file is called
 )
 
 target_link_libraries(app PRIVATE fpm)
+
 ```
 
 3- Build the project with commands:
@@ -46,9 +50,20 @@ cmake -S . -B build
 cmake --build build
 ```
 
-4- Include the necessary files:
+4- Just final check, your project structure must be something like:
 
-```cpp
-#include "FPM.hpp"
-#include "fpm_operators.hpp"
+```
+YourRootProject/
+    CMakeLists.txt # YOUR CMakeLists.txt that you will put step 2 in.
+
+    src/
+        main.cpp # YOUR main file
+
+    FPM/ # THE EXTRACTED .RAR FILE
+        include/
+            FPM.hpp
+            fpm_operators.hpp
+        src/
+            FPM.cpp
+    .vscode_cmake # RENAME THIS TO .vscode then when your done coding with the library, press F7 to build and run.
 ```
