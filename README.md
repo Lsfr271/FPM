@@ -24,7 +24,6 @@ YourRootProject/
         FPM.hpp
 
     .vscode/
-        settings.json
         tasks.json
         launch.json
         c_cpp_properties.json
