@@ -3,6 +3,9 @@
 ## DESCRIPTION
 This API allows you to check file permissions. There can be 3 levels, USER, ADMIN, and OWNER. User has low-control, Admin has moderate control, and Owner has full control. There can only be 1 owner.
 
+## EXAMPLES
+- if you would like to see examples please visit `documentation/main.cpp` or `documentation/main2.cpp` in this repository.
+
 # HOW TO INSTALL (GCC/G++ && CMAKE)
 
 ## MANDATORY NOTES YOU NEED TO READ
